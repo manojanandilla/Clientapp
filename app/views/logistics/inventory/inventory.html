@@ -6,6 +6,10 @@
       	 <tab heading="Item Details" select="getItemdetails()" ng-show="$parent.PermissionService.showMenu('READ_INVENTORY')">
         <div class="pull-right btn-group">
           <a ng-show="PermissionService.showMenu('CREATE_INVENTORY')" href="#/createitemdetails" class="btn btn-primary"><i class="icon-plus icon-white"></i>{{ 'button.add' | translate }}</a>
+          <select ng-model="source" class="input-medium" style="margin-top:10px;margin-left:2px;" ng-change="searchSource(source)">
+          		<option value="NEW">NEW</option>
+          		<option value="USED">USED</option>
+    	  </select>
         </div>
        
         <div class="row-fluid">

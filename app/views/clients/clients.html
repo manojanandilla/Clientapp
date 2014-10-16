@@ -21,8 +21,13 @@
 </div>
 <div class="row-fluid" ng-show="PermissionService.showMenu('READ_CLIENT')">
 <form ng-submit="search(filterText)">
-    <input ng-model="filterText" type="text" class="span marginbottom0px" placeholder="Filter by Account#/Name/Phone/email/Identity/Device#">
-
+    <input ng-model="filterText" type="text" style="width:772px;" placeholder="Filter by Account#/Name/Phone/email/Identity/Device#">
+	<select ng-model="status" class="input-medium" ng-change="searchSource(status)">
+    	<option value="NEW">NEW</option>
+        <option value="ACTIVE">ACTIVE</option>
+        <option value="DEACTIVE">DEACTIVE</option>
+        <option value="CLOSED">CLOSED</option>
+    </select>
 </form>
 	<table class="table">
         <thead>

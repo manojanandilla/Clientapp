@@ -10,9 +10,10 @@
       scope.InActiveClients = 0;
       scope.PendingClients = 0;
       scope.totalPages = 1;
+      scope.status="ACTIVE";	/**Change to DEACTIVE OR CLOSED OR NEW, When do you want to displays list of clients that particular status*/
       
       var fetchFunction = function(offset, limit, callback) {
-        resourceFactory.clientResource.getAllClients({offset: offset, limit: limit} , function(data){
+        resourceFactory.clientResource.getAllClients({offset: offset, limit: limit,status: scope.status} , function(data){
         	scope.totalClients = data.totalFilteredRecords;
         	if(scope.totalClients%15 == 0)	
         		scope.totalPages = scope.totalClients/15;
@@ -79,7 +80,18 @@
        
        scope.search = function(filterText) {
         scope.clients = paginatorService.paginate(scope.search123, 14);
-       }
+       };
+       
+       /**
+        * @ Changing status
+        * */
+        scope.searchSource=function(sourceStatus){
+        	
+            scope.searchSources123 = function(offset, limit, callback) {
+            	resourceFactory.clientResource.getAllClients({offset: offset, limit: limit , status: sourceStatus } , callback); 
+            };
+            scope.clients = paginatorService.paginate(scope.searchSources123, 14);
+        };
     }
   });
   mifosX.ng.application.controller('ClientController', ['$scope', 'ResourceFactory', 'PaginatorService','$location','PermissionService',mifosX.controllers.ClientController]).run(function($log) {
